@@ -177,19 +177,41 @@ const options2 = {
 DELETE /me/calendarGroups/{id}
 DELETE /users/{id | userPrincipalName}/calendarGroups/{id}
 /* ********************************* NOTIFICATION ******************* *************/
-
-let data3 = {
+/* *******************Add Notification******************* */
+const data = {
     "changeType": "created,updated,deleted",
     "notificationUrl": "https://keyvaultoutlookcalendar.vault.azure.net/secrets/nrx2?tenantId=xdatgdgmail.onmicrosoft.com",
     "resource": "/me/events",
     "expirationDateTime": "2022-09-19T20:00:00",
     "clientState": clientState
 }
-const options3 = {
+const options = {
     method: 'POST',
     headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${accessTokenAzure}` },
-    data: JSON.stringify(data3),
+    data: JSON.stringify(data),
     url: "https://graph.microsoft.com/beta/subscriptions",
+};
+/* *******************Get Notification******************* */
+const options = {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${accessTokenAzure}` },
+    url: `https://graph.microsoft.com/beta/subscriptions/{id}`
+};
+/* *******************Update Notification******************* */
+const data = {
+   "expirationDateTime":"2023-11-22T18:23:45.9356913Z"
+}
+const options = {
+    method: 'PATCH',
+    headers: { Content-type: application/json, Authorization : Bearer ${accessTokenAzure} },
+    data: JSON.stringify(data),
+    url: `https://graph.microsoft.com/beta/subscriptions/{id}`
+};
+/* *******************Delete Notification******************* */
+const options = {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${accessTokenAzure}` },
+    url: `https://graph.microsoft.com/beta/subscriptions/{subscription-id}`
 };
 
 // ======================= DATA ======================

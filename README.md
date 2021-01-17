@@ -344,15 +344,17 @@ const options = {
 
   `domainname` - The name of your tenant; for example, consto.onmicrosoft.com or contoso.com.
 
-**Code example**
+_**Code example**_
 ```
 const data = {
-    "changeType": "created,updated,deleted",
-    "notificationUrl": "https://keyvaultoutlookcalendar.vault.azure.net/secrets/nrx2?tenantId=xdatgdgmail.onmicrosoft.com",
-    "resource": "/me/events",
-    "expirationDateTime": "2022-09-19T20:00:00",
-    "clientState": clientState
+   "changeType": "created,updated,deleted",
+   "notificationUrl": "https://keyvaultoutlookcalendar.vault.azure.net/secrets/nrx2?tenantId=xdatgdgmail.onmicrosoft.com",
+   "resource": "/me/events",
+   "expirationDateTime":"2023-11-20T18:23:45.9356913Z",
+   "clientState": "secretClientValue",
+   "latestSupportedTlsVersion": "v1_2"
 }
+
 const options = {
     method: 'POST',
     headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${accessTokenAzure}` },
@@ -395,7 +397,7 @@ const options = {
 - method: `DELETE`
 - headers: `{ Authorization : Bearer ${accessTokenAzure} }`
 - url : https://graph.microsoft.com/beta/subscriptions/{id}
-
+                                           
 ```
 const options = {
     method: 'DELETE',

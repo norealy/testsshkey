@@ -3,6 +3,7 @@ const ENV = require('./utils/Env');
 const qs = require('qs');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 const app = express();
 const port = 4000;
 const stateSecretAzure = ENV.get("AZURE_STATE", 'RANDOMID@@--123');
@@ -11,6 +12,7 @@ const redirectUrlAzure = ENV.get("AZURE_REDIRECT", "http://localhost:4000/auth/m
 const scopeAzure = "calendars.readwrite";
 const azureIdAzure = ENV.get("AZURE_ID");
 const secretAzure = ENV.get("AZURE_SECRET");
+app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/outlook', (req, res) => {
@@ -46,6 +48,7 @@ app.get('/auth/microsoft', async (req, res) => {
 
 app.post('/code', async (req, res) => {
 	const code = req.body.code;
+	console.log(stateAzure);
 	const urlGetToken = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
 	let data = {
 		client_id: azureIdAzure,
@@ -66,15 +69,14 @@ app.post('/code', async (req, res) => {
 		const result = await axios(options);
 		const accessTokenAzure = result.data.access_token;
 		console.log(accessTokenAzure)
-		
-		
-
+		// res.cookie('accessTokenAzure', accessTokenAzure);
 		return res.send("");
 	} catch (e) {
 		console.log(e)
 		return res.send(e)
 	}
 });
+
 
 app.listen(port, (req, res) => {
 	console.log(`Server start on port :${port}`)
