@@ -303,6 +303,7 @@ const options = {
 - method: `POST`
 - headers: `{ Authorization : Bearer ${accessTokenAzure} }`
 - url : https://graph.microsoft.com/v1.0/subscriptions
+
 - **Create notificationUrl**
 
 *a.* _Steps Configuring the Azure Event Hub_ :
@@ -357,5 +358,48 @@ const options = {
     headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${accessTokenAzure}` },
     data: JSON.stringify(data),
     url: "https://graph.microsoft.com/beta/subscriptions",
+};
+```
+
+**Get subscriptions**
+- method: `GET`
+- headers: `{ Authorization : Bearer ${accessTokenAzure} }`
+- url : https://graph.microsoft.com/beta/subscriptions/{id}
+
+```
+const options = {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${accessTokenAzure}` },
+    url: `https://graph.microsoft.com/beta/subscriptions/{id}`
+};
+```
+
+**Update subscriptions**
+- method: `PATCH`
+- headers: `{Content-type: application/json, Authorization : Bearer ${accessTokenAzure} }`
+- url : https://graph.microsoft.com/beta/subscriptions/{id}
+
+```
+const data = {
+   "expirationDateTime":"2023-11-22T18:23:45.9356913Z"
+}
+const options = {
+    method: 'PATCH',
+    headers: { Content-type: application/json, Authorization : Bearer ${accessTokenAzure} },
+    data: JSON.stringify(data),
+    url: `https://graph.microsoft.com/beta/subscriptions/{id}`
+};
+```
+
+**Delete subscriptions**
+- method: `DELETE`
+- headers: `{ Authorization : Bearer ${accessTokenAzure} }`
+- url : https://graph.microsoft.com/beta/subscriptions/{id}
+
+```
+const options = {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${accessTokenAzure}` },
+    url: `https://graph.microsoft.com/beta/subscriptions/{subscription-id}`
 };
 ```
